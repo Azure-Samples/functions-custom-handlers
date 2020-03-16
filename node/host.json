@@ -6,8 +6,8 @@
 	},
 	"httpWorker": {
 		"description": {
-			"defaultExecutablePath": "dotnet",
-			"defaultWorkerPath": "CSharpCustomHandlers/bin/Debug/netcoreapp2.2/CSharpCustomHandlers.dll"
+			"defaultExecutablePath": "node",
+			"defaultWorkerPath": "server.js"
 		}
 	}
 }
