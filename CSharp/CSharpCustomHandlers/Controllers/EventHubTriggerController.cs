@@ -14,14 +14,12 @@ namespace CSharpCustomHandlers.Controllers
             _logger = logger;
         }
 
-        // GET api/values/5
         [HttpGet]
         public ActionResult<string> Get()
         {
             return "hello from c# handler worker";
         }
 
-        // POST api/values
         [HttpPost]
         public ActionResult Post([FromBody]InvocationRequest value)
         {

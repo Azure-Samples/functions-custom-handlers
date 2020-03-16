@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CSharpCustomHandlers;
 
 namespace CSharpCustomHandlers.Controllers
 {
@@ -19,14 +13,12 @@ namespace CSharpCustomHandlers.Controllers
             _logger = logger;
         }
 
-        // GET api/values/5
         [HttpGet]
         public ActionResult<string> Get()
         {
             return "hello queue from c# worker";
         }
 
-        // POST api/values
         [HttpPost]
         public ActionResult Post([FromBody]InvocationRequest value)
         {
