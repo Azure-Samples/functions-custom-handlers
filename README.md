@@ -1,64 +1,26 @@
----
-page_type: sample
-languages:
-- csharp
-products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
----
+# Azure Functions custom handlers (preview)
 
-# Official Microsoft Sample
+Every Functions app is executed by a language-specific handler. While Azure Functions supports many [language handlers](https://docs.microsoft.com/azure/azure-functions/supported-languages) by default, there are cases where you may want additional control over the app execution environment. Custom handlers give you this additional control.
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+Custom handlers are lightweight web servers that receive events from the Functions host. Any language that supports HTTP primitives can implement a custom handler.
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
+Custom handlers are best suited for situations where you want to:
 
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
+- Implement a Functions app in a language beyond the officially supported languages
+- Implement a Functions app in a language version or runtime not supported by default
+- Have granular control over the app execution environment
 
-Give a short description for your sample here. What does it do and why is it important?
+With custom handlers, all [triggers and input and output bindings](https://docs.microsoft.com/azure/azure-functions/functions-triggers-bindings) are supported via [extension bundles](https://docs.microsoft.com/azure/azure-functions/functions-bindings-register).
 
-## Contents
+Read more [about custom handlers in detail](https://docs.microsoft.com/azure/azure-functions/functions-custom-handlers).
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
+## Samples
 
-| File/folder       | Description                                |
-|-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
+The following samples demonstrate how to implement a custom handler in the following languages:
 
-## Prerequisites
-
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
-
-## Setup
-
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
-
-## Running the sample
-
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
-
-## Key concepts
-
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
-
-## Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+- [C#](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/CSharp)
+- [Go](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/go)
+- [Java](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/Java)
+- [JavaScript](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/node)
+- [R](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/R)
+- [Rust](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/Rust)
