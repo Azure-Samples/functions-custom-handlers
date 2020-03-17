@@ -6,10 +6,10 @@ Example functions featured in this repo include:
 
 | Name | Trigger | Input | Output |
 |------|---------|-------|--------|
-| [QueueTrigger](./queuetrigger) | Queue Storage | Queue Storage | Queue Storage |
-| [QueueTriggerWithOutputs](./queuetriggerwithoutputs) | Queue Storage | Queue Storage | Queue Storage |
-| [SimpleHttpTrigger](./simplehttptrigger) | HTTP | n/a   | n/a |
-| [SimpleHttpTriggerWithReturn](./SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
+| [QueueTrigger](../../../tree/master/node/QueueTrigger) | Queue Storage | Queue Storage | Queue Storage |
+| [QueueTriggerWithOutputs](../../../tree/master/node/QueueTriggerWithOutputs) | Queue Storage | Queue Storage | Queue Storage |
+| [SimpleHttpTrigger](../../../tree/master/node/SimpleHttpTrigger) | HTTP | n/a   | n/a |
+| [SimpleHttpTriggerWithReturn](../../../tree/master/node/SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
 
 ## Configuration
 

@@ -6,7 +6,7 @@ Example functions featured in this repo include:
 
 | Name | Trigger | Input | Output |
 |------|---------|-------|--------|
-| [SimpleHttpTrigger](./simplehttptrigger) | HTTP | n/a   | n/a |
+| [SimpleHttpTrigger](../../../tree/master/Rust/SimpleHttpTrigger) | HTTP | n/a   | n/a |
 
 ## Configuration
 

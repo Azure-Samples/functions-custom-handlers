@@ -7,7 +7,7 @@ Example functions featured in this repo include:
 
 | Name | Trigger | Input | Output |
 |------|---------|-------|--------|
-| [hello](./hello) | HTTP | n/a | na/ |
+| [hello](../../../tree/master/R/hello) | HTTP | n/a | na/ |
 
 ## Configuration
 

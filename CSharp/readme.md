@@ -7,9 +7,9 @@ Example functions featured in this repo include:
 
 | Name | Trigger | Input | Output |
 |------|---------|-------|--------|
-| [SimpleHttpTrigger](../../../tree/master/CSharp/simplehttptrigger) | HTTP | n/a   | n/a    |
-| [EventHubTrigger](../../../tree/master/CSharp/eventhubtrigger) | Event Hub | Event Hub | n/a |
-| [QueueTrigger](../../../tree/master/CSharp/queuetrigger) | Queue Storage | Queue Storage | Queue Storage|
+| [SimpleHttpTrigger](../../../tree/master/CSharp/SimpleHttpTrigger) | HTTP | n/a   | n/a    |
+| [EventHubTrigger](../../../tree/master/CSharp/EventHubTrigger) | Event Hub | Event Hub | n/a |
+| [QueueTrigger](../../../tree/master/CSharp/QueueTrigger) | Queue Storage | Queue Storage | Queue Storage|
 
 ## Configuration
 

@@ -7,13 +7,13 @@ Example functions featured in this repo include:
 
 | Name | Trigger | Input | Output |
 |------|---------|-------|--------|
-| [BlobTrigger](./blobtrigger) | Blob Storage | Blob Storage | Blob Storage|
-| [HttpTriggerStringReturnValue](./httptriggerstringreturnvalue) | HTTP | n/a | Queue Storage |
-| [HttpTriggerWithOutputs](./httptriggerwithoutputs)| HTTP | n/a | Queue Storage |
+| [BlobTrigger](../../../tree/master/Java/BlobTrigger) | Blob Storage | Blob Storage | Blob Storage|
+| [HttpTriggerStringReturnValue](../../../tree/master/Java/HttpTriggerStringReturnValue) | HTTP | n/a | Queue Storage |
+| [HttpTriggerWithOutputs](../../../tree/master/Java/HttpTriggerWithOutputs)| HTTP | n/a | Queue Storage |
 | [QueueTrigger](./queuetrigger) | Queue Storage | Queue Storage | Queue Storage |
-| [QueueTriggerWithOutputs](./queuetriggerwithoutputs) | Queue Storage | Queue Storage | Queue Storage |
-| [SimpleHttpTrigger](./simplehttptrigger) | HTTP | n/a   | n/a |
-| [SimpleHttpTriggerWithReturn](./SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
+| [QueueTriggerWithOutputs](../../../tree/master/Java/QueueTriggerWithOutputs) | Queue Storage | Queue Storage | Queue Storage |
+| [SimpleHttpTrigger](../../../tree/master/Java/SimpleHttpTrigger) | HTTP | n/a   | n/a |
+| [SimpleHttpTriggerWithReturn](../../../tree/master/Java/SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
 
 ## Configuration
 

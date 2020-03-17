@@ -7,13 +7,13 @@ Example functions featured in this repo include:
 
 | Name | Trigger | Input | Output |
 |------|---------|-------|--------|
-| [BlobTrigger](./blobtrigger) | Blob Storage | Blob Storage | Blob Storage|
-| [HttpTriggerStringReturnValue](./httptriggerstringreturnvalue) | HTTP | n/a | Queue Storage |
-| [HttpTriggerWithOutputs](./httptriggerwithoutputs)| HTTP | n/a | Queue Storage |
-| [QueueTrigger](./queuetrigger) | Queue Storage | Queue Storage | Queue Storage |
-| [QueueTriggerWithOutputs](./queuetriggerwithoutputs) | Queue Storage | Queue Storage | Queue Storage |
-| [SimpleHttpTrigger](./simplehttptrigger) | HTTP | n/a   | n/a |
-| [SimpleHttpTriggerWithReturn](./SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
+| [BlobTrigger](../../../tree/master/go/BlobTrigger) | Blob Storage | Blob Storage | Blob Storage|
+| [HttpTriggerStringReturnValue](../../../tree/master/go/HttpTriggerStringReturnValue) | HTTP | n/a | Queue Storage |
+| [HttpTriggerWithOutputs](../../../tree/master/go/HttpTriggerWithOutputs)| HTTP | n/a | Queue Storage |
+| [QueueTrigger](../../../tree/master/go/QueueTrigger) | Queue Storage | Queue Storage | Queue Storage |
+| [QueueTriggerWithOutputs](../../../tree/master/go/QueueTriggerWithOutputs) | Queue Storage | Queue Storage | Queue Storage |
+| [SimpleHttpTrigger](../../../tree/master/go/SimpleHttpTrigger) | HTTP | n/a   | n/a |
+| [SimpleHttpTriggerWithReturn](../../../tree/master/go/SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
 
 ## Configuration
 
