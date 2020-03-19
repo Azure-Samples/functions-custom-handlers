@@ -24,3 +24,23 @@ The following samples demonstrate how to implement a custom handler in the follo
 - [JavaScript](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/node)
 - [R](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/R)
 - [Rust](https://github.com/Azure-Samples/functions-custom-handlers/tree/master/Rust)
+
+## Docker
+
+Following is an example docker using azure functions node base image
+
+```
+# To enable ssh & remote debugging on app service change the base image to the one below
+# FROM mcr.microsoft.com/azure-functions/node:2.0-appservice
+FROM mcr.microsoft.com/azure-functions/node:2.0
+
+ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
+    AzureFunctionsJobHost__Logging__Console__IsEnabled=true
+
+COPY . /home/site/wwwroot
+
+RUN cd /home/site/wwwroot
+
+```
+
+Copy any of the samples to the directory where you have dockerfile and build an image
