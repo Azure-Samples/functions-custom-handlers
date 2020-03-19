@@ -21,3 +21,5 @@ The *local.settings-example.json* is provided to show what values the app is exp
 
 - run `cargo build`
 - run `func host start`
+
+**NOTE**: if running on a non-Windows platform you will have to remove ".exe" from the `defaultExecutablePath` in the `host.json`.
