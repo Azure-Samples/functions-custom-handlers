@@ -27,7 +27,7 @@ The following samples demonstrate how to implement a custom handler in the follo
 
 ## Docker
 
-Following is an example docker using azure functions node base image
+Following is an example dockerfile using azure functions node base image
 
 ```
 # To enable ssh & remote debugging on app service change the base image to the one below
