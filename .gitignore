@@ -350,11 +350,9 @@ MigrationBackup/
 .ionide/
 /go/*.exe
 java/*/target
-Java/*/target
 java/*/.idea
-Java/*/.idea
-.classpath
-.project
-.settings
-*/sample/.vscode
-*/sample/sample-custom-handler.iml
+java/*/.classpath
+java/*/.project
+java/*/.settings
+java/*/.vscode
+java/*/sample-custom-handler.iml
