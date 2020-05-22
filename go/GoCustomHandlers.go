@@ -110,6 +110,36 @@ func queueTriggerWithOutputsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+func httpTriggerWithOutputsHandler(w http.ResponseWriter, r *http.Request) {
+	var invokeReq InvokeRequest
+	d := json.NewDecoder(r.Body)
+	decodeErr := d.Decode(&invokeReq)
+	if decodeErr != nil {
+		// bad JSON or unrecognized json field
+		http.Error(w, decodeErr.Error(), http.StatusBadRequest)
+		return
+	}
+	fmt.Println("The JSON data is:invokeReq metadata......")
+	fmt.Println(invokeReq.Metadata)
+	fmt.Println("The JSON data is:invokeReq data......")
+	fmt.Println(invokeReq.Data)
+
+	returnValue := 100
+	outputs := make(map[string]interface{})
+	outputs["output1"] = "output from go"
+
+	invokeResponse := InvokeResponse{outputs, []string{"test log1", "test log2"}, returnValue}
+
+	js, err := json.Marshal(invokeResponse)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
+
 func httpTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	t := time.Now()
 	fmt.Println(t.Month())
@@ -204,6 +234,9 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/HttpTrigger", httpTriggerHandler)
 	mux.HandleFunc("/HttpTriggerStringReturnValue", httpTriggerHandlerStringReturnValue)
+	mux.HandleFunc("/HttpTriggerWithOutputs", httpTriggerWithOutputsHandler)
+	mux.HandleFunc("/v2/FirstName", httpTriggerWithOutputsHandler)
+	mux.HandleFunc("/foo/v1/FirstName",httpTriggerHandler)
 	mux.HandleFunc("/QueueTrigger", queueTriggerHandler)
 	mux.HandleFunc("/BlobTrigger", blobTriggerHandler)
 	mux.HandleFunc("/QueueTriggerWithOutputs", queueTriggerWithOutputsHandler)
