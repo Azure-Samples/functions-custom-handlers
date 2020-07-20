@@ -4,10 +4,11 @@
 		"id": "Microsoft.Azure.Functions.ExtensionBundle",
 		"version": "[1.*, 2.0.0)"
 	},
-	"httpWorker": {
+	"customHandler": {
 		"description": {
 			"defaultExecutablePath": "RScript",
-			"defaultWorkerPath": "rserver.R"
-		}
+			"arguments": ["rserver.R"]
+		},
+		"enableForwardingHttpRequest":true
 	}
 }

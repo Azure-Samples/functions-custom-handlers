@@ -197,18 +197,17 @@ func simpleHttpTriggerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	httpInvokerPort, exists := os.LookupEnv("FUNCTIONS_HTTPWORKER_PORT")
+	customHandlerPort, exists := os.LookupEnv("FUNCTIONS_CUSTOMHANDLER_PORT")
 	if exists {
-		fmt.Println("FUNCTIONS_HTTPWORKER_PORT: " + httpInvokerPort)
+		fmt.Println("FUNCTIONS_CUSTOMHANDLER_PORT: " + customHandlerPort)
 	}
 	mux := http.NewServeMux()
-	mux.HandleFunc("/HttpTrigger", httpTriggerHandler)
 	mux.HandleFunc("/HttpTriggerStringReturnValue", httpTriggerHandlerStringReturnValue)
 	mux.HandleFunc("/QueueTrigger", queueTriggerHandler)
 	mux.HandleFunc("/BlobTrigger", blobTriggerHandler)
 	mux.HandleFunc("/QueueTriggerWithOutputs", queueTriggerWithOutputsHandler)
-	mux.HandleFunc("/SimpleHttpTrigger", simpleHttpTriggerHandler)
-	mux.HandleFunc("/SimpleHttpTriggerWithReturn", simpleHttpTriggerHandler)
-	log.Println("Go server Listening...on httpInvokerPort:", httpInvokerPort)
-	log.Fatal(http.ListenAndServe(":"+httpInvokerPort, mux))
+	mux.HandleFunc("/api/SimpleHttpTrigger", simpleHttpTriggerHandler)
+	mux.HandleFunc("/api/SimpleHttpTriggerWithReturn", simpleHttpTriggerHandler)
+	fmt.Println("Go server Listening...on FUNCTIONS_CUSTOMHANDLER_PORT:", customHandlerPort)
+	log.Fatal(http.ListenAndServe(":"+customHandlerPort, mux))
 }
