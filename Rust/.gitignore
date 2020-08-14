@@ -1,2 +1,3 @@
 /target
 **/*.rs.bk
+local.settings.json
