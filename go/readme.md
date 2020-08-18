@@ -14,6 +14,7 @@ Example functions featured in this repo include:
 | [QueueTriggerWithOutputs](../../../tree/master/go/QueueTriggerWithOutputs) | Queue Storage | Queue Storage | Queue Storage |
 | [SimpleHttpTrigger](../../../tree/master/go/SimpleHttpTrigger) | HTTP | n/a   | n/a |
 | [SimpleHttpTriggerWithReturn](../../../tree/master/go/SimpleHttpTriggerWithReturn) | HTTP | Event Hub | n/a |
+| [TimerTrigger](../../../tree/master/go/TimerTrigger) | Timer | n/a | n/a |
 
 ## Configuration
 
