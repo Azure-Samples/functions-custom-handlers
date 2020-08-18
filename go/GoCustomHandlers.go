@@ -196,6 +196,35 @@ func simpleHttpTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello World from go worker"))
 }
 
+func timerTriggerHandler(w http.ResponseWriter, r *http.Request) {
+	t := time.Now()
+	fmt.Println("TimerTrigger invoked at: ", t.String())
+
+	var invokeReq InvokeRequest
+	d := json.NewDecoder(r.Body)
+	decodeErr := d.Decode(&invokeReq)
+	if decodeErr != nil {
+		// bad JSON or unrecognized json field
+		http.Error(w, decodeErr.Error(), http.StatusBadRequest)
+		return
+	}
+	fmt.Println("The JSON data is:invokeReq metadata......")
+	fmt.Println(invokeReq.Metadata)
+	fmt.Println("The JSON data is:invokeReq data......")
+	fmt.Println(invokeReq.Data)
+
+	invokeResponse := InvokeResponse{Logs: []string{"test log1", "test log2"}}
+
+	js, err := json.Marshal(invokeResponse)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
+
 func main() {
 	httpInvokerPort, exists := os.LookupEnv("FUNCTIONS_HTTPWORKER_PORT")
 	if exists {
@@ -209,6 +238,7 @@ func main() {
 	mux.HandleFunc("/QueueTriggerWithOutputs", queueTriggerWithOutputsHandler)
 	mux.HandleFunc("/SimpleHttpTrigger", simpleHttpTriggerHandler)
 	mux.HandleFunc("/SimpleHttpTriggerWithReturn", simpleHttpTriggerHandler)
+	mux.HandleFunc("/TimerTrigger", timerTriggerHandler)
 	log.Println("Go server Listening...on httpInvokerPort:", httpInvokerPort)
 	log.Fatal(http.ListenAndServe(":"+httpInvokerPort, mux))
 }
