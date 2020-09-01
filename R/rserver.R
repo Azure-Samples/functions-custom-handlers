@@ -1,6 +1,6 @@
 library(httpuv)
 
-PORTEnv <- Sys.getenv("FUNCTIONS_HTTPWORKER_PORT")
+PORTEnv <- Sys.getenv("FUNCTIONS_CUSTOMHANDLER_PORT")
 PORT = strtoi(PORTEnv , base = 0L)
 
 http_not_found <- list(
@@ -18,7 +18,7 @@ hello_handler <- list(
 )
 
 routes <- list(
-  '/hello' = hello_handler,
+  '/api/hello' = hello_handler,
   # Required by App Engine.
   '/_ah/health' = list(
     GET = function (request) list()
