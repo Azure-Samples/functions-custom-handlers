@@ -349,4 +349,10 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /go/*.exe
-/Java/com.java/target/*
+java/*/target
+java/*/.idea
+java/*/.classpath
+java/*/.project
+java/*/.settings
+java/*/.vscode
+java/*/sample-custom-handler.iml
