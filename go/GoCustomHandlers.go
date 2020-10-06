@@ -9,28 +9,28 @@ import (
 	"time"
 )
 
-type ReturnValue struct {
+type returnValue struct {
 	Data string
 }
-type InvokeResponse struct {
+type invokeResponse struct {
 	Outputs     map[string]interface{}
 	Logs        []string
 	ReturnValue interface{}
 }
 
-type InvokeResponseStringReturnValue struct {
+type invokeResponseStringReturnValue struct {
 	Outputs     map[string]interface{}
 	Logs        []string
 	ReturnValue string
 }
 
-type InvokeRequest struct {
+type invokeRequest struct {
 	Data     map[string]interface{}
 	Metadata map[string]interface{}
 }
 
 func queueTriggerHandler(w http.ResponseWriter, r *http.Request) {
-	var invokeReq InvokeRequest
+	var invokeReq invokeRequest
 	d := json.NewDecoder(r.Body)
 	decodeErr := d.Decode(&invokeReq)
 	if decodeErr != nil {
@@ -43,9 +43,9 @@ func queueTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(invokeReq.Data)
 
 	returnValue := "HelloWorld"
-	invokeResponse := InvokeResponse{Logs: []string{"test log1", "test log2"}, ReturnValue: returnValue}
+	invokeResp := invokeResponse{Logs: []string{"test log1", "test log2"}, ReturnValue: returnValue}
 
-	js, err := json.Marshal(invokeResponse)
+	js, err := json.Marshal(invokeResp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -56,7 +56,7 @@ func queueTriggerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func blobTriggerHandler(w http.ResponseWriter, r *http.Request) {
-	var invokeReq InvokeRequest
+	var invokeReq invokeRequest
 	d := json.NewDecoder(r.Body)
 	decodeErr := d.Decode(&invokeReq)
 	if decodeErr != nil {
@@ -67,10 +67,10 @@ func blobTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("The JSON data is:invokeReq metadata......")
 	fmt.Println(invokeReq.Metadata)
 
-	returnValue := invokeReq.Data["triggerBlob"]
-	invokeResponse := InvokeResponse{Logs: []string{"test log1", "test log2"}, ReturnValue: returnValue}
+	returnVal := invokeReq.Data["triggerBlob"]
+	invokeResp := invokeResponse{Logs: []string{"test log1", "test log2"}, ReturnValue: returnVal}
 
-	js, err := json.Marshal(invokeResponse)
+	js, err := json.Marshal(invokeResp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -81,7 +81,7 @@ func blobTriggerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func queueTriggerWithOutputsHandler(w http.ResponseWriter, r *http.Request) {
-	var invokeReq InvokeRequest
+	var invokeReq invokeRequest
 	d := json.NewDecoder(r.Body)
 	decodeErr := d.Decode(&invokeReq)
 	if decodeErr != nil {
@@ -94,13 +94,13 @@ func queueTriggerWithOutputsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("The JSON data is:invokeReq data......")
 	fmt.Println(invokeReq.Data)
 
-	returnValue := 100
+	returnVal := 100
 	outputs := make(map[string]interface{})
 	outputs["output1"] = "output from go"
 
-	invokeResponse := InvokeResponse{outputs, []string{"test log1", "test log2"}, returnValue}
+	invokeResp := invokeResponse{outputs, []string{"test log1", "test log2"}, returnVal}
 
-	js, err := json.Marshal(invokeResponse)
+	js, err := json.Marshal(invokeResp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -121,16 +121,16 @@ func httpTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("invocationid is: %s \n", invocationid)
 
 	//w.Write([]byte("Hello World from go worker:pgopa"))
-	returnValue := ReturnValue{Data: "return val"}
+	returnVal := returnValue{Data: "return val"}
 	outputs := make(map[string]interface{})
 	outputs["output"] = "Mark Taylor"
 	outputs["output2"] = map[string]interface{}{
 		"home":   "123-466-799",
 		"office": "564-987-654",
 	}
-	invokeResponse := InvokeResponse{outputs, []string{"test log1", "test log2"}, returnValue}
+	invokeResp := invokeResponse{outputs, []string{"test log1", "test log2"}, returnVal}
 
-	js, err := json.Marshal(invokeResponse)
+	js, err := json.Marshal(invokeResp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -165,7 +165,7 @@ func httpTriggerHandlerStringReturnValue(w http.ResponseWriter, r *http.Request)
 	res["body"] = "my world"
 	res["headers"] = headers
 	outputs["res"] = res
-	invokeResponse := InvokeResponseStringReturnValue{outputs, []string{"test log1", "test log2"}, "Hello,World"}
+	invokeResponse := invokeResponseStringReturnValue{outputs, []string{"test log1", "test log2"}, "Hello,World"}
 
 	js, err := json.Marshal(invokeResponse)
 	if err != nil {
@@ -177,7 +177,7 @@ func httpTriggerHandlerStringReturnValue(w http.ResponseWriter, r *http.Request)
 	w.Write(js)
 }
 
-func simpleHttpTriggerHandler(w http.ResponseWriter, r *http.Request) {
+func simpleHTTPTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	t := time.Now()
 	fmt.Println(t.Month())
 	fmt.Println(t.Day())
@@ -206,8 +206,8 @@ func main() {
 	mux.HandleFunc("/QueueTrigger", queueTriggerHandler)
 	mux.HandleFunc("/BlobTrigger", blobTriggerHandler)
 	mux.HandleFunc("/QueueTriggerWithOutputs", queueTriggerWithOutputsHandler)
-	mux.HandleFunc("/api/SimpleHttpTrigger", simpleHttpTriggerHandler)
-	mux.HandleFunc("/api/SimpleHttpTriggerWithReturn", simpleHttpTriggerHandler)
+	mux.HandleFunc("/api/SimpleHttpTrigger", simpleHTTPTriggerHandler)
+	mux.HandleFunc("/api/SimpleHttpTriggerWithReturn", simpleHTTPTriggerHandler)
 	fmt.Println("Go server Listening...on FUNCTIONS_CUSTOMHANDLER_PORT:", customHandlerPort)
 	log.Fatal(http.ListenAndServe(":"+customHandlerPort, mux))
 }
