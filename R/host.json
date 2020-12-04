@@ -6,7 +6,7 @@
 	},
 	"customHandler": {
 		"description": {
-			"defaultExecutablePath": "RScript",
+			"defaultExecutablePath": "Rscript",
 			"arguments": ["rserver.R"]
 		},
 		"enableForwardingHttpRequest":true
