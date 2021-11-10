@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "YOUR_STORAGE_CONNECTION_STRING",
+      "FUNCTIONS_WORKER_RUNTIME": "custom"
+    }
+  }
+  
