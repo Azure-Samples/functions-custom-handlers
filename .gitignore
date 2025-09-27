@@ -10,6 +10,10 @@
 *.userosscache
 *.sln.docstates
 
+# Ignore VS Code settings and workspace files
+.vscode/
+*.code-workspace
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

@@ -9,24 +9,15 @@ import (
 	"time"
 )
 
-type ReturnValue struct {
-	Data string
+type InvokeRequest struct {
+	Data     map[string]json.RawMessage
+	Metadata map[string]interface{}
 }
+
 type InvokeResponse struct {
 	Outputs     map[string]interface{}
 	Logs        []string
 	ReturnValue interface{}
-}
-
-type InvokeResponseStringReturnValue struct {
-	Outputs     map[string]interface{}
-	Logs        []string
-	ReturnValue string
-}
-
-type InvokeRequest struct {
-	Data     map[string]interface{}
-	Metadata map[string]interface{}
 }
 
 func queueTriggerHandler(w http.ResponseWriter, r *http.Request) {
@@ -110,73 +101,6 @@ func queueTriggerWithOutputsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
-func httpTriggerHandler(w http.ResponseWriter, r *http.Request) {
-	t := time.Now()
-	fmt.Println(t.Month())
-	fmt.Println(t.Day())
-	fmt.Println(t.Year())
-	ua := r.Header.Get("User-Agent")
-	fmt.Printf("user agent is: %s \n", ua)
-	invocationid := r.Header.Get("X-Azure-Functions-InvocationId")
-	fmt.Printf("invocationid is: %s \n", invocationid)
-
-	//w.Write([]byte("Hello World from go worker:pgopa"))
-	returnValue := ReturnValue{Data: "return val"}
-	outputs := make(map[string]interface{})
-	outputs["output"] = "Mark Taylor"
-	outputs["output2"] = map[string]interface{}{
-		"home":   "123-466-799",
-		"office": "564-987-654",
-	}
-	invokeResponse := InvokeResponse{outputs, []string{"test log1", "test log2"}, returnValue}
-
-	js, err := json.Marshal(invokeResponse)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
-}
-
-func httpTriggerHandlerStringReturnValue(w http.ResponseWriter, r *http.Request) {
-	t := time.Now()
-	fmt.Println(t.Month())
-	fmt.Println(t.Day())
-	fmt.Println(t.Year())
-	ua := r.Header.Get("User-Agent")
-	fmt.Printf("user agent is: %s \n", ua)
-	invocationid := r.Header.Get("X-Azure-Functions-InvocationId")
-	fmt.Printf("invocationid is: %s \n", invocationid)
-
-	outputs := make(map[string]interface{})
-	outputs["output"] = "Mark Taylor"
-	outputs["output2"] = map[string]interface{}{
-		"home":   "123-466-799",
-		"office": "564-987-654",
-	}
-	headers := make(map[string]interface{})
-	headers["header1"] = "header1Val"
-	headers["header2"] = "header2Val"
-
-	res := make(map[string]interface{})
-	res["statusCode"] = "201"
-	res["body"] = "my world"
-	res["headers"] = headers
-	outputs["res"] = res
-	invokeResponse := InvokeResponseStringReturnValue{outputs, []string{"test log1", "test log2"}, "Hello,World"}
-
-	js, err := json.Marshal(invokeResponse)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
-}
-
 func simpleHttpTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	t := time.Now()
 	fmt.Println(t.Month())
@@ -196,18 +120,51 @@ func simpleHttpTriggerHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello World from go worker"))
 }
 
+func httpTriggerWithStreaming(w http.ResponseWriter, r *http.Request) {
+	name := r.URL.Query().Get("name")
+	if name == "" {
+		name = "world"
+	}
+
+	// Ensure we can flush.
+	flusher, ok := w.(http.Flusher)
+	if !ok {
+		http.Error(w, "streaming unsupported", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Cache-Control", "no-store")
+	w.Header().Set("X-Content-Type-Options", "nosniff")
+	w.WriteHeader(http.StatusOK)
+
+	// Start a JSON array.
+	fmt.Fprint(w, "[{\"chunk\":1,\"message\":\"Hello ")
+	flusher.Flush()
+
+	// Simulate work and stream more.
+	time.Sleep(2000 * time.Millisecond)
+	fmt.Fprintf(w, "{\"chunk\":2,\"message\":\"%s\"}", name)
+	flusher.Flush()
+
+	time.Sleep(1000 * time.Millisecond)
+	fmt.Fprint(w, ", {\"chunk\":3,\"status\":\"complete\"}]")
+	flusher.Flush()
+
+	return
+}
+
 func main() {
 	customHandlerPort, exists := os.LookupEnv("FUNCTIONS_CUSTOMHANDLER_PORT")
 	if exists {
 		fmt.Println("FUNCTIONS_CUSTOMHANDLER_PORT: " + customHandlerPort)
 	}
 	mux := http.NewServeMux()
-	mux.HandleFunc("/HttpTriggerStringReturnValue", httpTriggerHandlerStringReturnValue)
 	mux.HandleFunc("/QueueTrigger", queueTriggerHandler)
 	mux.HandleFunc("/BlobTrigger", blobTriggerHandler)
 	mux.HandleFunc("/QueueTriggerWithOutputs", queueTriggerWithOutputsHandler)
 	mux.HandleFunc("/api/SimpleHttpTrigger", simpleHttpTriggerHandler)
-	mux.HandleFunc("/api/SimpleHttpTriggerWithReturn", simpleHttpTriggerHandler)
+	mux.HandleFunc("/api/HttpTriggerWithStreaming", httpTriggerWithStreaming)
 	fmt.Println("Go server Listening...on FUNCTIONS_CUSTOMHANDLER_PORT:", customHandlerPort)
 	log.Fatal(http.ListenAndServe(":"+customHandlerPort, mux))
 }

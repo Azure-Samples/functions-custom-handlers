@@ -1,6 +1,9 @@
 {
-    "IsEncrypted": false,
-    "Values": {
-      "AzureWebJobsStorage": "YOUR_STORAGE_CONNECTION_STRING"
-    }
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "custom",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_CUSTOMHANDLER_PORT": "8080"
+  },
+  "ConnectionStrings": {}
 }

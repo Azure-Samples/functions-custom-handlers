@@ -13,13 +13,6 @@
       "type": "http",
       "direction": "out",
       "name": "res"
-    },
-    {
-      "name": "$return",
-      "type": "queue",
-      "direction": "out",
-      "queueName": "test-output-node",
-      "connection": "AzureWebJobsStorage"      
     }
   ]
 }

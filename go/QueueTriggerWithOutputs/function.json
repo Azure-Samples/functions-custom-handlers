@@ -4,22 +4,22 @@
       "name": "myQueueItem",
       "type": "queueTrigger",
       "direction": "in",
-      "queueName": "test-inputmultiout-node",
+      "queueName": "test-inputmultiout",
       "connection": "AzureWebJobsStorage"
     },
     {
       "name": "$return",
       "type": "queue",
       "direction": "out",
-      "queueName": "test-output-node",
-      "connection": "AzureWebJobsStorage"      
+      "queueName": "test-output",
+      "connection": "AzureWebJobsStorage"
     },
 	{
       "name": "output1",
       "type": "queue",
       "direction": "out",
-      "queueName": "test-output1-node",
-      "connection": "AzureWebJobsStorage"      
+      "queueName": "test-output1",
+      "connection": "AzureWebJobsStorage"
     }
   ]
 }

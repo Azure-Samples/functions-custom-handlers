@@ -4,15 +4,15 @@
       "name": "myQueueItem",
       "type": "queueTrigger",
       "direction": "in",
-      "queueName": "test-input-node",
+      "queueName": "test-input",
       "connection": "AzureWebJobsStorage"
     },
     {
       "name": "$return",
       "type": "queue",
       "direction": "out",
-      "queueName": "test-output-node",
-      "connection": "AzureWebJobsStorage"      
+      "queueName": "test-output",
+      "connection": "AzureWebJobsStorage"
     }
   ]
 }
