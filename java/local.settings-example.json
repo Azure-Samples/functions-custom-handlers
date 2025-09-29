@@ -1,0 +1,6 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "YOUR_STORAGE_CONNECTION_STRING"
+    }
+}
